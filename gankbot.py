@@ -12,9 +12,9 @@ client = Bot(description="Basic Bot by Habchy#1665, adapted for use by 'plz enjo
 f=open("../botkey.txt")
 for l in f:
     l=l.strip()
-client_token=l
+client_token=l	# this is to keep the token private
 
-weebcounter = 0
+weebcounter = 0	# these counters are for the reddit feeds
 haikucounter = 0
 keebcounter = 0
 mecounter = 0
@@ -41,7 +41,7 @@ async def on_ready():
 # This is a basic example of a call and response command. You tell it do "this" and it does it.
 @client.event
 async def on_message(message):
-	if message.content.startswith(">help"):
+	if message.content.startswith(">help"):	# help dialogue
 		await client.send_message(message.author, "**------ Commands ------**\n\
 Prefix all commands with > character.\n\
 # character is optional, specifies number to repeat.\n\
@@ -60,31 +60,34 @@ haiku #: 		Fetches most recent post on r/youtubehaiku _(limit 3)_.\n\
 me #: 		Fetches most recent post on r/me\_irl _(limit 3)_.\n\
 code #: 		Fetches most recent post on r/programmerhumor _(limit 3)_.\n\
 video #: 		Fetches most recent post on r/videos _(limit 3)_.")
-	elif message.content.startswith(">stop"):
-		for voice in client.voice_clients:
-			if voice.server == message.channel.server:
-				await voice.disconnect()
-	elif message.content.startswith(">play"):
-		channel = client.get_channel(message.author.voice.voice_channel.id)
+	elif message.content.startswith(">stop"):	# stop command for audio
+		for voice in client.voice_clients:	# loops through all connections
+			if voice.server == message.channel.server:	# if server matches the currently connected server
+				await voice.disconnect()	# disconnect the voice client
+	elif message.content.startswith(">play"):	# play youtube link
+		channel = client.get_channel(message.author.voice.voice_channel.id)	# get the author's voice channel
 		voice = await client.join_voice_channel(channel)
-		link = message.content[6:]
-		player = await voice.create_ytdl_player(link)
+		link = message.content[6:]	# fetch link from author's message
+		player = await voice.create_ytdl_player(link)	# play the youtube link
 		player.start()
+		while not player.is_done():
+			await asyncio.sleep(.01)
+		await voice.disconnect()
 	elif message.content.startswith(">oof"):
 		channel = client.get_channel(message.author.voice.voice_channel.id)
 		voice = await client.join_voice_channel(channel)
-		msg = await client.send_message(message.channel, ":weary: ***oof***")
-		repetitions = message.content[5:]
-		if repetitions == "":
+		msg = await client.send_message(message.channel, ":weary: ***oof***")	# oof message
+		repetitions = message.content[5:]	# repetitions specifies how many times to loop
+		if repetitions == "":	# if none specified, do command 1 time
 			repetitions = 1
-		if int(repetitions) > 10:
+		if int(repetitions) > 10:	# limit of 10 max
 			repetitions = 10
-		for i in range(0, int(repetitions)):
-			player = voice.create_ffmpeg_player("assets/quietoof.mp3")
+		for i in range(0, int(repetitions)):	# loop through all repetitions
+			player = voice.create_ffmpeg_player("assets/quietoof.mp3")	# play audio
 			player.start()
-			while not player.is_done():
+			while not player.is_done():	# wait for player to finish before starting again
 				await asyncio.sleep(.01)
-		await voice.disconnect()
+		await voice.disconnect()	# disconnect when done
 	elif message.content.startswith(">ping"):
 		msg = await client.send_message(message.channel, ":ping_pong: Pong! :ping_pong:")
 	elif message.content.startswith(">OOF"):
@@ -159,16 +162,16 @@ video #: 		Fetches most recent post on r/videos _(limit 3)_.")
 				await asyncio.sleep(.01)
 		await voice.disconnect()
 	elif message.content.startswith(">weeb"):
-		global weebcounter
-		d = feedparser.parse("http://inline-reddit.com/feed/?subreddit=awwnime")
-		repetitions = message.content[6:]
+		global weebcounter	# uses global counter to keep track of how many posts were already gone through
+		d = feedparser.parse("http://inline-reddit.com/feed/?subreddit=awwnime")	# fetch data
+		repetitions = message.content[6:]	# see how many repetitions user wants
 		if repetitions == "":
 			repetitions = 1
 		if int(repetitions) > 3:
 			repetitions = 3
-		for i in range(0, int(repetitions)):
+		for i in range(0, int(repetitions)):	# display post
 			msg = await client.send_message(message.channel, " " + d['entries'][weebcounter]['title'] + ":\n" + d['entries'][weebcounter]['link'])
-			weebcounter += 1
+			weebcounter += 1	# increment counter to next post
 	elif message.content.startswith(">haiku"):
 		global haikucounter
 		d = feedparser.parse("http://inline-reddit.com/feed/?subreddit=youtubehaiku")
