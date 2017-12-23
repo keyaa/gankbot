@@ -45,18 +45,20 @@ async def on_message(message):
 		await client.send_message(message.author, "**------ Commands ------**\n\
 Prefix all commands with > character.\n\
 ping: 		Generic response test for robot\n\
-oof: 		Roblox death sound _(must be in voice channel, limit 10)_\n\
-OOF: 		Loud Roblox death sound _(must be in voice channel, limit 3)_\n\
-thot:		Begone, thot! _(must be in voice channel, limit 3)_\n\
-THOT: 		***BEGONE, THOT!*** _(must be in voice channel, limit 1)_\n\
-quack:		Duck noise _(must be in voice channel, limit 10)_\n\
-woop: 		Unknown noise _(must be in voice channel, limit 10)_\n\
-weeb: 		Fetches most recent post on r/awwnime _(limit 3)_\n\
-keeb: 		Fetches most recent post on r/mechanicalkeyboards _(limit 3)_\n\
-haiku: 		Fetches most recent post on r/youtubehaiku _(limit 3)_\n\
-me: 		Fetches most recent post on r/me_irl _(limit 3)_\n\
-code: 		Fetches most recent post on r/programmerhumor _(limit 3)_\n\
-video: 		Fetches most recent post on r/videos _(limit 3)_")
+stop: 		Stop currently playing audio and leave voice channel\n\
+play ___: 		Starts playing Youtube link\n\
+oof #: 		Roblox death sound _(must be in voice channel, limit 10)_\n\
+OOF #: 		Loud Roblox death sound _(must be in voice channel, limit 3)_\n\
+thot #:		Begone, thot! _(must be in voice channel, limit 3)_\n\
+THOT #: 		***BEGONE, THOT!*** _(must be in voice channel, limit 1)_\n\
+quack #:		Duck noise _(must be in voice channel, limit 10)_\n\
+woop #: 		Unknown noise _(must be in voice channel, limit 10)_\n\
+weeb #: 		Fetches most recent post on r/awwnime _(limit 3)_\n\
+keeb #: 		Fetches most recent post on r/mechanicalkeyboards _(limit 3)_\n\
+haiku #: 		Fetches most recent post on r/youtubehaiku _(limit 3)_\n\
+me #: 		Fetches most recent post on r/me_irl _(limit 3)_\n\
+code #: 		Fetches most recent post on r/programmerhumor _(limit 3)_\n\
+video #: 		Fetches most recent post on r/videos _(limit 3)_")
 	elif message.content.startswith(">stop"):
 		for voice in client.voice_clients:
 			if voice.server == message.channel.server:
