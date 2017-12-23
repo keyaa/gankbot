@@ -46,8 +46,8 @@ async def on_message(message):
 Prefix all commands with > character.\n\
 # character is optional, specifies number to repeat.\n\
 ping: 		Generic response test for robot.\n\
-stop: 		Stop currently playing audio and leave voice channel.\n\
-play 'link': 		Starts playing Youtube link.\n\
+stop: 		Stop current audio and leave voice channel.\n\
+play 'link': 		Starts playing Youtube link _(must be in voice channel)_.\n\
 oof #: 		Roblox death sound _(must be in voice channel, limit 10)_.\n\
 OOF #: 		Loud Roblox death sound _(must be in voice channel, limit 3)_.\n\
 thot #:		Begone, thot! _(must be in voice channel, limit 3)_.\n\
@@ -57,7 +57,7 @@ woop #: 		Unknown noise _(must be in voice channel, limit 10)_.\n\
 weeb #: 		Fetches most recent post on r/awwnime _(limit 3)_.\n\
 keeb #: 		Fetches most recent post on r/mechanicalkeyboards _(limit 3)_.\n\
 haiku #: 		Fetches most recent post on r/youtubehaiku _(limit 3)_.\n\
-me #: 		Fetches most recent post on r/me_irl _(limit 3)_.\n\
+me #: 		Fetches most recent post on r/me\_irl _(limit 3)_.\n\
 code #: 		Fetches most recent post on r/programmerhumor _(limit 3)_.\n\
 video #: 		Fetches most recent post on r/videos _(limit 3)_.")
 	elif message.content.startswith(">stop"):
