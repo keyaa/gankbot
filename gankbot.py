@@ -53,6 +53,7 @@ OOF #: 		Loud Roblox death sound _(must be in voice channel, limit 3)_.\n\
 thot #:		Begone, thot! _(must be in voice channel, limit 3)_.\n\
 THOT #: 		***BEGONE, THOT!*** _(must be in voice channel, limit 1)_.\n\
 quack #:		Duck noise _(must be in voice channel, limit 10)_.\n\
+git #:		git text-to-speech _(must be in voice channel, limit 10)_.\n\
 woop #: 		Unknown noise _(must be in voice channel, limit 10)_.\n\
 weeb #: 		Fetches most recent post on r/awwnime _(limit 3)_.\n\
 keeb #: 		Fetches most recent post on r/mechanicalkeyboards _(limit 3)_.\n\
@@ -101,6 +102,21 @@ video #: 		Fetches most recent post on r/videos _(limit 3)_.")
 			repetitions = 3
 		for i in range(0, int(repetitions)):
 			player = voice.create_ffmpeg_player("assets/loudoof.mp3")
+			player.start()
+			while not player.is_done():
+				await asyncio.sleep(.01)
+		await voice.disconnect()
+	elif message.content.startswith(">git"):
+		channel = client.get_channel(message.author.voice.voice_channel.id)
+		voice = await client.join_voice_channel(channel)
+		msg = await client.send_file(message.channel, "assets/git.png")
+		repetitions = message.content[5:]
+		if repetitions == "":
+			repetitions = 1
+		if int(repetitions) > 10:
+			repetitions = 10
+		for i in range(0, int(repetitions)):
+			player = voice.create_ffmpeg_player("assets/git.mp3")
 			player.start()
 			while not player.is_done():
 				await asyncio.sleep(.01)
