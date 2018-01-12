@@ -1,4 +1,4 @@
-
+# These are the dependecies. The bot depends on these to function, hence the name. Please do not change these unless your adding to them, because they can break the bot.
 import os
 import discord
 import asyncio
@@ -10,13 +10,11 @@ import feedparser
 
 # Here you can modify the bot's prefix and description and whether it sends help in direct messages or not.
 client = Bot(description="Basic Bot by Habchy#1665, adapted for use by 'plz enjoy game#6067'.", command_prefix=">", pm_help = True)
-"""
 f=open("../botkey.txt")
 for l in f:
     l=l.strip()
 client_token=l	# this is to keep the token private
-"""
-client_token = os.environ.get('privateToken')
+# client_token = os.environ.get('privateToken')
 
 weebcounter = 0	# these counters are for the reddit feeds
 anirlcounter = 0
