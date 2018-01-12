@@ -1,4 +1,4 @@
-# These are the dependecies. The bot depends on these to function, hence the name. Please do not change these unless your adding to them, because they can break the bot.
+
 import os
 import discord
 import asyncio
@@ -204,9 +204,9 @@ video #: 		Fetches most recent post on r/videos _(limit 3)_.")
 			repetitions = 1
 		if int(repetitions) > 3:
 			repetitions = 3
-		for i in range(0, int(repetitions)):	# display post
-			msg = await client.send_message(message.channel, " " + d['entries'][weebcounter]['title'] + ":\n" + d['entries'][weebcounter]['link'])
-			anirlcounter += 1	# increment counter to next post
+		for i in range(0, int(repetitions)):
+			msg = await client.send_message(message.channel, " " + d['entries'][anirlcounter]['title'] + ":\n" + d['entries'][anirlcounter]['link'])
+			anirlcounter += 1
 			if anirlcounter >= 25:
 				anirlcounter = 0
 	elif message.content.startswith(">haiku"):
