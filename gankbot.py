@@ -183,19 +183,6 @@ video #: 		Fetches most recent post on r/videos _(limit 3)_.")
 			while not player.is_done():
 				await asyncio.sleep(.01)
 		await voice.disconnect()
-	elif message.content.startswith(">anirl"):
-		global weebcounter	# uses global counter to keep track of how many posts were already gone through
-		d = feedparser.parse("http://inline-reddit.com/feed/?subreddit=anime_irl")	# fetch data
-		repetitions = message.content[6:]	# see how many repetitions user wants
-		if repetitions == "":
-			repetitions = 1
-		if int(repetitions) > 3:
-			repetitions = 3
-		for i in range(0, int(repetitions)):	# display post
-			msg = await client.send_message(message.channel, " " + d['entries'][weebcounter]['title'] + ":\n" + d['entries'][weebcounter]['link'])
-			anirlcounter += 1	# increment counter to next post
-			if anirlcounter >= 25:
-				anirlcounter = 0
 	elif message.content.startswith(">weeb"):
 		global weebcounter	# uses global counter to keep track of how many posts were already gone through
 		d = feedparser.parse("http://inline-reddit.com/feed/?subreddit=awwnime")	# fetch data
@@ -209,6 +196,19 @@ video #: 		Fetches most recent post on r/videos _(limit 3)_.")
 			weebcounter += 1	# increment counter to next post
 			if weebcounter >= 25:
 				weebcounter = 0
+	elif message.content.startswith(">anirl"):
+		global anirlcounter
+		d = feedparser.parse("http://inline-reddit.com/feed/?subreddit=anime_irl")
+		repetitions = message.content[7:]
+		if repetitions == "":
+			repetitions = 1
+		if int(repetitions) > 3:
+			repetitions = 3
+		for i in range(0, int(repetitions)):	# display post
+			msg = await client.send_message(message.channel, " " + d['entries'][weebcounter]['title'] + ":\n" + d['entries'][weebcounter]['link'])
+			anirlcounter += 1	# increment counter to next post
+			if anirlcounter >= 25:
+				anirlcounter = 0
 	elif message.content.startswith(">haiku"):
 		global haikucounter
 		d = feedparser.parse("http://inline-reddit.com/feed/?subreddit=youtubehaiku")
