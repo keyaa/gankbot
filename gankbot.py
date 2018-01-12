@@ -19,6 +19,7 @@ client_token=l	# this is to keep the token private
 client_token = os.environ.get('privateToken')
 
 weebcounter = 0	# these counters are for the reddit feeds
+anirlcounter = 0
 haikucounter = 0
 keebcounter = 0
 mecounter = 0
@@ -181,6 +182,19 @@ video #: 		Fetches most recent post on r/videos _(limit 3)_.")
 			while not player.is_done():
 				await asyncio.sleep(.01)
 		await voice.disconnect()
+	elif message.content.startswith(">anirl"):
+		global weebcounter	# uses global counter to keep track of how many posts were already gone through
+		d = feedparser.parse("http://inline-reddit.com/feed/?subreddit=anime_irl")	# fetch data
+		repetitions = message.content[6:]	# see how many repetitions user wants
+		if repetitions == "":
+			repetitions = 1
+		if int(repetitions) > 3:
+			repetitions = 3
+		for i in range(0, int(repetitions)):	# display post
+			msg = await client.send_message(message.channel, " " + d['entries'][weebcounter]['title'] + ":\n" + d['entries'][weebcounter]['link'])
+			anirlcounter += 1	# increment counter to next post
+			if anirlcounter >= 25:
+				anirlcounter = 0
 	elif message.content.startswith(">weeb"):
 		global weebcounter	# uses global counter to keep track of how many posts were already gone through
 		d = feedparser.parse("http://inline-reddit.com/feed/?subreddit=awwnime")	# fetch data
@@ -192,6 +206,8 @@ video #: 		Fetches most recent post on r/videos _(limit 3)_.")
 		for i in range(0, int(repetitions)):	# display post
 			msg = await client.send_message(message.channel, " " + d['entries'][weebcounter]['title'] + ":\n" + d['entries'][weebcounter]['link'])
 			weebcounter += 1	# increment counter to next post
+			if weebcounter >= 25:
+				weebcounter = 0
 	elif message.content.startswith(">haiku"):
 		global haikucounter
 		d = feedparser.parse("http://inline-reddit.com/feed/?subreddit=youtubehaiku")
@@ -203,6 +219,8 @@ video #: 		Fetches most recent post on r/videos _(limit 3)_.")
 		for i in range(0, int(repetitions)):
 			msg = await client.send_message(message.channel, " " + d['entries'][haikucounter]['title'] + ":\n" + d['entries'][haikucounter]['link'])
 			haikucounter += 1
+			if haikucounter >= 25:
+				haikucounter = 0
 	elif message.content.startswith(">keeb"):
 		global keebcounter
 		d = feedparser.parse("http://inline-reddit.com/feed/?subreddit=mechanicalkeyboards")
@@ -214,6 +232,8 @@ video #: 		Fetches most recent post on r/videos _(limit 3)_.")
 		for i in range(0, int(repetitions)):
 			msg = await client.send_message(message.channel, " " + d['entries'][keebcounter]['title'] + ":\n" + d['entries'][keebcounter]['link'])
 			keebcounter += 1
+			if keebcounter >= 25:
+				keebcounter = 0
 	elif message.content.startswith(">me"):
 		global mecounter
 		d = feedparser.parse("http://inline-reddit.com/feed/?subreddit=me_irl")
@@ -225,6 +245,8 @@ video #: 		Fetches most recent post on r/videos _(limit 3)_.")
 		for i in range(0, int(repetitions)):
 			msg = await client.send_message(message.channel, " " + d['entries'][mecounter]['title'] + ":\n" + d['entries'][mecounter]['link'])
 			mecounter += 1
+			if mecounter >= 25:
+				mecounter = 0
 	elif message.content.startswith(">video"):
 		global videocounter
 		d = feedparser.parse("http://inline-reddit.com/feed/?subreddit=videos")
@@ -236,6 +258,8 @@ video #: 		Fetches most recent post on r/videos _(limit 3)_.")
 		for i in range(0, int(repetitions)):
 			msg = await client.send_message(message.channel, " " + d['entries'][videocounter]['title'] + ":\n" + d['entries'][videocounter]['link'])
 			videocounter += 1
+			if videocounter >= 25:
+				videocounter = 0
 	elif message.content.startswith(">code"):
 		global codecounter
 		d = feedparser.parse("http://inline-reddit.com/feed/?subreddit=programmerhumor")
@@ -247,6 +271,8 @@ video #: 		Fetches most recent post on r/videos _(limit 3)_.")
 		for i in range(0, int(repetitions)):
 			msg = await client.send_message(message.channel, " " + d['entries'][codecounter]['title'] + ":\n" + d['entries'][codecounter]['link'])
 			codecounter += 1
+			if codecounter >= 25:
+				codecounter = 0
 
 # After you have modified the code, feel free to delete the line above (line 33) so it does not keep popping up everytime you initiate the ping commmand.
 	
