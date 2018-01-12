@@ -1,4 +1,5 @@
 # These are the dependecies. The bot depends on these to function, hence the name. Please do not change these unless your adding to them, because they can break the bot.
+import os
 import discord
 import asyncio
 import youtube_dl
@@ -15,6 +16,7 @@ for l in f:
     l=l.strip()
 client_token=l	# this is to keep the token private
 """
+client_token = os.environ.get('privateToken')
 
 weebcounter = 0	# these counters are for the reddit feeds
 haikucounter = 0
