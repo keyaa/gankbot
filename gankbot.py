@@ -63,6 +63,7 @@ woop #: 		Unknown noise _(must be in voice channel, limit 10)_.\n\
 weeb #: 		Fetches most recent post on r/awwnime _(limit 3)_.\n\
 keeb #: 		Fetches most recent post on r/mechanicalkeyboards _(limit 3)_.\n\
 haiku #: 		Fetches most recent post on r/youtubehaiku _(limit 3)_.\n\
+anirl #: 		Fetches most recent post on r/anime\_irl _(limit 3)_.\n\
 me #: 		Fetches most recent post on r/me\_irl _(limit 3)_.\n\
 code #: 		Fetches most recent post on r/programmerhumor _(limit 3)_.\n\
 video #: 		Fetches most recent post on r/videos _(limit 3)_.")
