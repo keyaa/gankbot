@@ -236,7 +236,7 @@ video #: 		Fetches most recent post on r/videos _(limit 3)_.")
 			if keebcounter >= 25:
 				keebcounter = 0
 	elif message.content.startswith(">dank"):
-		global keebcounter
+		global dankcounter
 		d = feedparser.parse("http://inline-reddit.com/feed/?subreddit=dankmemes")
 		repetitions = message.content[6:]
 		if repetitions == "":
