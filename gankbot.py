@@ -17,6 +17,7 @@ client_token=l	# this is to keep the token private
 # client_token = os.environ.get('privateToken')
 
 weebcounter = 0	# these counters are for the reddit feeds
+dankcounter = 0
 anirlcounter = 0
 haikucounter = 0
 keebcounter = 0
@@ -60,6 +61,7 @@ git #:		git text-to-speech _(must be in voice channel, limit 10)_.\n\
 woop #: 		Unknown noise _(must be in voice channel, limit 10)_.\n\
 weeb #: 		Fetches most recent post on r/awwnime _(limit 3)_.\n\
 keeb #: 		Fetches most recent post on r/mechanicalkeyboards _(limit 3)_.\n\
+dank #: 		Fetches most recent post on r/dankmemes _(limit 3)_.\n\
 haiku #: 		Fetches most recent post on r/youtubehaiku _(limit 3)_.\n\
 anirl #: 		Fetches most recent post on r/anime\_irl _(limit 3)_.\n\
 me #: 		Fetches most recent post on r/me\_irl _(limit 3)_.\n\
@@ -233,6 +235,19 @@ video #: 		Fetches most recent post on r/videos _(limit 3)_.")
 			keebcounter += 1
 			if keebcounter >= 25:
 				keebcounter = 0
+	elif message.content.startswith(">dank"):
+		global keebcounter
+		d = feedparser.parse("http://inline-reddit.com/feed/?subreddit=dankmemes")
+		repetitions = message.content[6:]
+		if repetitions == "":
+			repetitions = 1
+		if int(repetitions) > 3:
+			repetitions = 3
+		for i in range(0, int(repetitions)):
+			msg = await client.send_message(message.channel, " " + d['entries'][dankcounter]['title'] + ":\n" + d['entries'][dankcounter]['link'])
+			dankcounter += 1
+			if dankcounter >= 25:
+				dankcounter = 0
 	elif message.content.startswith(">me"):
 		global mecounter
 		d = feedparser.parse("http://inline-reddit.com/feed/?subreddit=me_irl")
