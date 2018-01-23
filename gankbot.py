@@ -83,9 +83,9 @@ video #: 		Fetches most recent post on r/videos _(limit 3)_.")
 			await asyncio.sleep(.01)
 		await voice.disconnect()
 	elif message.content.startswith(">oof"):
+		msg = await client.send_message(message.channel, ":weary: ***oof***")	# oof message
 		channel = client.get_channel(message.author.voice.voice_channel.id)
 		voice = await client.join_voice_channel(channel)
-		msg = await client.send_message(message.channel, ":weary: ***oof***")	# oof message
 		repetitions = message.content[5:]	# repetitions specifies how many times to loop
 		if repetitions == "":	# if none specified, do command 1 time
 			repetitions = 1
@@ -100,9 +100,9 @@ video #: 		Fetches most recent post on r/videos _(limit 3)_.")
 	elif message.content.startswith(">ping"):
 		msg = await client.send_message(message.channel, ":ping_pong: Pong! :ping_pong:")
 	elif message.content.startswith(">OOF"):
+		msg = await client.send_file(message.channel, "assets/oof.png")
 		channel = client.get_channel(message.author.voice.voice_channel.id)
 		voice = await client.join_voice_channel(channel)
-		msg = await client.send_file(message.channel, "assets/oof.png")
 		repetitions = message.content[5:]
 		if repetitions == "":
 			repetitions = 1
@@ -115,9 +115,9 @@ video #: 		Fetches most recent post on r/videos _(limit 3)_.")
 				await asyncio.sleep(.01)
 		await voice.disconnect()
 	elif message.content.startswith(">git"):
+		msg = await client.send_file(message.channel, "assets/git.png")
 		channel = client.get_channel(message.author.voice.voice_channel.id)
 		voice = await client.join_voice_channel(channel)
-		msg = await client.send_file(message.channel, "assets/git.png")
 		repetitions = message.content[5:]
 		if repetitions == "":
 			repetitions = 1
