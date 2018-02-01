@@ -24,6 +24,7 @@ keebcounter = 0
 mecounter = 0
 videocounter = 0
 codecounter = 0
+prequelcounter = 0
 
 # This is what happens everytime the bot launches. In this case, it prints information like server count, user count the bot is connected to, and the bot id in the console.
 # Do not mess with it because the bot can break, if you wish to do so, please consult me or someone trusted.
@@ -66,6 +67,7 @@ keeb #: 		Fetches most recent post on r/mechanicalkeyboards _(limit 3)_.\n\
 dank #: 		Fetches most recent post on r/dankmemes _(limit 3)_.\n\
 haiku #: 		Fetches most recent post on r/youtubehaiku _(limit 3)_.\n\
 anirl #: 		Fetches most recent post on r/anime\_irl _(limit 3)_.\n\
+prequel #: 		Fetches most recent post on r/prequelmemes _(limit 3)_.\n\
 me #: 		Fetches most recent post on r/me\_irl _(limit 3)_.\n\
 code #: 		Fetches most recent post on r/programmerhumor _(limit 3)_.\n\
 video #: 		Fetches most recent post on r/videos _(limit 3)_.")
@@ -317,6 +319,19 @@ video #: 		Fetches most recent post on r/videos _(limit 3)_.")
 			codecounter += 1
 			if codecounter >= 25:
 				codecounter = 0
+	elif message.content.startswith(">prequel"):
+		global prequelcounter
+		d = feedparser.parse("http://inline-reddit.com/feed/?subreddit=prequelmemes")
+		repetitions = message.content[9:]
+		if repetitions == "":
+			repetitions = 1
+		if int(repetitions) > 3:
+			repetitions = 3
+		for i in range(0, int(repetitions)):
+			msg = await client.send_message(message.channel, " " + d['entries'][prequelcounter]['title'] + ":\n" + d['entries'][prequelcounter]['link'])
+			prequelcounter += 1
+			if prequelcounter >= 25:
+				prequelcounter = 0
 
 # After you have modified the code, feel free to delete the line above (line 33) so it does not keep popping up everytime you initiate the ping commmand.
 	
