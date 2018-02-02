@@ -1,12 +1,16 @@
 # These are the dependecies. The bot depends on these to function, hence the name. Please do not change these unless your adding to them, because they can break the bot.
+import urllib.request
 import os
 import discord
 import asyncio
 import youtube_dl
+from pathlib import Path
 from discord.ext.commands import Bot
 from discord.ext import commands
 import platform
 import feedparser
+class AppURLopener(urllib.request.FancyURLopener):
+    version = "Mozilla/5.0"
 
 # Here you can modify the bot's prefix and description and whether it sends help in direct messages or not.
 client = Bot(description="Basic Bot by Habchy#1665, adapted for use by 'plz enjoy game#6067'.", command_prefix=">", pm_help = True)
@@ -98,7 +102,15 @@ video #: 		Fetches most recent post on r/videos _(limit 3)_.")
 			player.start()
 			while not player.is_done():	# wait for player to finish before starting again
 				await asyncio.sleep(.01)
-		await voice.disconnect()	# disconnect when done
+	elif message.content.startswith(">whodidthis"): # edit image, add "whodidthis" filter
+	# incomplete feature, very buggy
+		img = message.embeds
+		if (img): # list (url image) is not empty
+			if (os.path.isfile("tempsave.jpg")):
+				os.remove("tempsave.jpg")
+			urllib.request.urlretrieve(img[0]["url"], "tempsave.jpg")
+			msg = await client.send_message(message.channel, ":joy::joy::ok_hand: ***LMAOOOOO WHO DID THIS*** :joy::joy::fire:")
+			msg = await client.send_file(message.channel, "tempsave.jpg")
 	elif message.content.startswith(">ping"):
 		msg = await client.send_message(message.channel, ":ping_pong: Pong! :ping_pong:")
 	elif message.content.startswith(">OOF"):
